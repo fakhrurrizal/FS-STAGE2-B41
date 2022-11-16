@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&family=Roboto:wght@300&family=Sen&display=swap');
+
+
 .App {
   text-align: center;
 }
@@ -35,4 +38,123 @@
   to {
     transform: rotate(360deg);
   }
+}
+body{
+  font-family: 'Sen',sans-serif;
+}
+.btnLoginApp:hover{
+  background-color: transparent;
+  color: #BD0707;
+  border: 1px solid #BD0707;
+}
+.btnLoginApp{
+  font-family: 'Sen', sans-serif;
+  border: 1px solid #BD0707;
+  background-color: #BD0707;
+}
+.btnRegisterApp:hover{
+  background-color: transparent;
+  color: #BD0707;
+  border: 1px solid #BD0707;
+}
+.btnRegisterApp{
+  font-family: 'Sen', sans-serif;
+  border: 1px solid #BD0707;
+  background-color: #BD0707;
+}
+.btnRegister:hover{
+  background-color: transparent;
+  color: #BD0707;}
+.btnRegister{
+    width: 100px;
+  }
+.btnLogin{
+  width: 100px;
+}
+.detailProduct{
+  width:100%;
+   margin:50px auto;
+   display: flex;
+}
+.detailProduct img{
+  margin-left: 10%;
+}
+.detailProduct .titleDetail{
+  color: #BD0707;
+  font-weight: bold;
+  font-size: 45px;
+  font-family: 'Sen', sans-serif;
+}
+
+.detailProduct .priceDetail{
+  color: #BD0707;
+  margin-top: 10px;
+  font-weight: bold;
+  margin-left: 0px;
+  font-size: 23px;
+}
+.detailProduct .descriptProduct{
+
+  width: 100%;
+}
+.detailProduct .variantTitle{
+  font-weight: bold;
+  font-size: 21px;
+  color: #BD0707;
+}
+.detailProduct .variantDetail{
+  margin-top: 30px;
+  width: 100%;
+  color: #BD0707;
+}
+.variant{
+  text-align: center;
+  width: 30%;
+  margin-right: 20px;
+  height: 30%;
+  
+}
+.variant p{
+  margin-top: 5px;
+  width: 100%;
+  font-size: 14px;
+}
+.listVariant{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-top: 20px;
+}
+.detailProduct .quantity{
+  font-size: 25px;
+  margin-top: 20px;
+  display: flex;
+  font-weight: bold;
+}
+.detailProduct .quantity .quantityPrice{
+  margin-left: 72%;
+  margin-bottom: 20px;
+}
+.detailProduct .addCart{
+  width: 100%;
+  background-color: #BD0707;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  font-weight: 700;
+  border: 1px solid #BD0707 ;
+}
+.detailProduct .addCart:hover{
+  background-color: white;
+  color: #BD0707;
+  font-weight: 700;
+}
+.lineOr{
+  display: flex;
+  margin-top: 15px;
+  justify-content: center;
+}
+.lineOr .line{
+  width: 45%;
+  margin-top: -4px;
 }
