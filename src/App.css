@@ -132,11 +132,11 @@ body{
   font-weight: bold;
 }
 .detailProduct .quantity .quantityPrice{
-  margin-left: 72%;
+  margin-left: 63%;
   margin-bottom: 20px;
 }
 .detailProduct .addCart{
-  width: 100%;
+  width: 92%;
   background-color: #BD0707;
   color: white;
   margin-top: 10px;
@@ -157,4 +157,88 @@ body{
 .lineOr .line{
   width: 45%;
   margin-top: -4px;
+}
+.profile{
+  width: 80%;
+  margin:50px auto;
+}
+.userProfile{
+  width: 50%;
+}
+.userProfile img{
+  margin-top: 20px;
+  width: 180px;
+  border-radius: 4px;
+height: 221px;
+}
+.historyTransaction{
+  width: 50%;
+}
+.profile h3{
+  color: #BD0707;
+  font-weight: bold;
+}
+.profile h5{
+  font-weight: bold;
+  color: #613D2B;
+}
+.profile .self{
+  margin-left: 30px;
+  margin-top: 20px;
+}
+.detailTransaction{
+  background-color: #F6DADA;
+  margin-top:10px;
+  width: 524px;
+  height: 242px;
+  border-radius: 5px;
+  padding: 15px;
+}
+.historyTransaction .detailPrice h5, .historyTransaction .detailPrice p{
+  color: #BD0707;
+}
+.itemTransaction{
+  font-size: 10px;
+}
+.itemTransaction img{
+  width: 80px;
+  margin-right: 15px;
+  height: 97px;
+}
+.logoBrand{
+  width: 55px;
+
+}
+.brandTransaction {
+  margin-left: -20px;
+  text-align: center;
+}
+.brandTransaction .statusTransaction{
+  background-color: #00d0ff27;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #00D1FF;
+  font-weight: bold;
+}
+.layoutProduct{
+  width: 75%;
+}
+.subTotal{
+  font-size: 13px;
+  font-weight: bold;
+}
+.navBar{
+  top: 0;
+  position: fixed;
+  overflow: hidden;
+  z-index: 1;
+  width: 100%;
+}
+.cardHome{
+  margin-top: 80px;
+}
+.text-muted{
+  position: absolut;
+  margin-left:60px;
+  margin-top: -10px;
 }

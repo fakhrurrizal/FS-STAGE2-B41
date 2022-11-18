@@ -1,21 +1,23 @@
 import React, { useState }from "react";
+import { Container, Nav, Navbar, Button, Stack, Dropdown } from 'react-bootstrap'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Logo from "../assets/image/logo.png"
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import Button from "react-bootstrap/Button";
-import Stack from "react-bootstrap/Stack";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRightFromBrancket, faUser } from '@fortawesome/free-solid-svg-icons'
+import users from '../assets/image/users.svg';
+import Logo from "../assets/image/logo.svg";
+import Cart from '../assets/image/cart.svg';
+
 import Login from "../auth/Login";
 import Register from "../auth/Register";
 
 function Navbars() {
-
+  
 
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar className="navBar" bg="light" expand="lg">
       <Container>
         <Navbar.Brand href="#home">
           <img src={Logo} className="logo-navbar"/>

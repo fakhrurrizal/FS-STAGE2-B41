@@ -1,16 +1,16 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Col, Button } from 'react-bootstrap';
-import Produk1 from '../assets/image/Produk1.png';
+import Produk1 from '../../assets/image/Produk1.png';
 
-import variant1 from '../assets/image/variant1.png'
-import variant2 from '../assets/image/variant2.png'
-import variant3 from '../assets/image/variant3.png'
-import variant4 from '../assets/image/variant4.png'
-import variant5 from '../assets/image/variant5.png'
-import variant6 from '../assets/image/variant6.png'
-import variant7 from '../assets/image/variant7.png'
-import variant8 from '../assets/image/variant8.png'
+import variant1 from '../../assets/image/variant1.png'
+import variant2 from '../../assets/image/variant2.png'
+import variant3 from '../../assets/image/variant3.png'
+import variant4 from '../../assets/image/variant4.png'
+import variant5 from '../../assets/image/variant5.png'
+import variant6 from '../../assets/image/variant6.png'
+import variant7 from '../../assets/image/variant7.png'
+import variant8 from '../../assets/image/variant8.png'
 
 export default function detailProduk(){
     return(
