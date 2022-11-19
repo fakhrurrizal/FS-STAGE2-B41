@@ -66,10 +66,11 @@ body{
   background-color: transparent;
   color: #BD0707;}
 .btnRegister{
-    width: 100px;
+    width: 125px;
   }
 .btnLogin{
-  width: 100px;
+  width: 125px;
+  margin-left: 35%;
 }
 .detailProduct{
   width:100%;
@@ -135,6 +136,91 @@ body{
   margin-left: 63%;
   margin-bottom: 20px;
 }
+
+
+.color-red {
+  color: var(--red-main);
+}
+
+.bg-red {
+  background: var(--red-main);
+}
+
+.btn-navbar {
+  padding: 10px 0;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+.btn-form {
+  padding: 13px 0;
+
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 25px;
+}
+
+.btn-white {
+  outline: var(--red-main);
+}
+
+.btn-white:hover {
+  background: var(--red-main);
+}
+
+.btn-main {
+  background: var(--red-main);
+}
+
+.btn-main:hover {
+  background: var(--white);
+  color: var(--red-main);
+  outline: var(--red-main);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.btn-user,
+.btn-user:hover {
+  padding: 7px 5px;
+  background: none;
+  outline: none;
+  border: none;
+}
+
+.badge-position {
+  right: -5px;
+}
+
+.icon-size {
+  width: 30px;
+  align-self: center;
+  justify-self: center;
+}
+
+.visibility-hidden {
+  visibility: hidden;
+}
+
+.product-content {
+  height: 400px;
+  width: 400px;
+}
+
+.image-product {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.productlist-image {
+  width: 100%;
+  height: 300px;
+}
+
 .detailProduct .addCart{
   width: 92%;
   background-color: #BD0707;
@@ -155,7 +241,7 @@ body{
   justify-content: center;
 }
 .lineOr .line{
-  width: 45%;
+  width: 30%;
   margin-top: -4px;
 }
 .profile{
@@ -237,8 +323,138 @@ height: 221px;
 .cardHome{
   margin-top: 80px;
 }
-.text-muted{
-  position: absolut;
-  margin-left:60px;
-  margin-top: -10px;
+.hereBtn{
+  color: black;
+  text-decoration: none;
+
+}
+.Cart{
+  width: 80%;
+  margin: 100px auto;
+  color: #BD0707
+}
+.detailCart h2{
+  font-weight: bold;
+}
+.detailCart{
+  width: 60%;
+}
+.detailCart h2{
+  margin-bottom: 30px;
+  font-weight: 900;
+}
+.detailCart .lineCart{
+  border: 1px solid #BD0707;
+}
+.inputCart{
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 25%;
+  height: 50px;
+  
+  background: rgba(224, 200, 200, 0.25);
+  border: 2px solid #BD0707;
+  border-radius: 5px;
+}
+.inputCart1{
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 25%;
+  margin-top: 6%;
+  height: 53px;
+  
+  background: rgba(224, 200, 200, 0.25);
+  border: 2px solid #BD0707;
+  border-radius: 5px;
+}
+.inputCart2{
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 25%;
+  margin-top: 12%;
+  height: 53px;
+  
+  background: rgba(224, 200, 200, 0.25);
+  border: 2px solid #BD0707;
+  border-radius: 5px;
+}
+.inputCart3{
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 25%;
+  margin-top: 18%;
+  height: 53px;
+  
+  background: rgba(224, 200, 200, 0.25);
+  border: 2px solid #BD0707;
+  border-radius: 5px;
+}
+.inputCart4{
+  box-sizing: border-box;
+
+  position: absolute;
+  width: 25%;
+  margin-top: 24%;
+  height: 115px;
+  
+  background: rgba(224, 200, 200, 0.25);
+  border: 2px solid #BD0707;
+  border-radius: 5px;
+}
+
+.formCart{
+  margin-left: 10%;
+  margin-top: 90px;
+}
+
+.detailCart .cartProduk{
+  width: 100px;
+  height: 110px;
+  border-radius: 5px;
+}
+.detailCart .lineSubtotal{
+  border: 1px solid #BD0707;
+  width: 60%;
+}
+.attachTransaction{
+  box-sizing: border-box;
+
+position: absolute;
+width: 216px;
+height: 122px;
+left: 655px;
+top: 555px;
+text-align: center;
+padding: 15px;
+
+background: rgba(224, 200, 200, 0.25);
+border: 2px solid #BD0707;
+border-radius: 5px;
+}
+
+.attachTransaction p{
+  font-weight: 500;
+  margin-top: 10px;
+  color: rgba(104, 50, 50, 0.5);
+
+}
+.paySubmit{
+  position: absolute;
+width: 25%;
+height: 40px;
+left: 990px;
+top: 720px;
+
+background: #BD0707;
+border-radius: 5px;  
+border:1px solid #BD0707;
+}
+.paySubmit:hover{
+  background-color: transparent;
+  color: #BD0707;
+  border: 1px solid #BD0707;
 }

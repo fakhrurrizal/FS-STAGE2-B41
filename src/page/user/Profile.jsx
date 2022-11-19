@@ -6,11 +6,13 @@ import produk1 from '../../assets/image/Produk1.png';
 import produk2 from '../../assets/image/Produk2.png';
 import Logo from '../../assets/image/logo.svg';
 import qode from '../../assets/image/QrCode.png';
+import Navbar from '../../component/navbar'
 
 
 export default function Profile(){
     return(
-        <>
+        <>  
+            <Navbar/>
             <Container>
                 <div className='profile d-flex'>
                     <div className='userProfile'>

@@ -1,24 +1,23 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Cart from './page/user/Cart';
-import Detail from './page/user/DetailProduct';
-import Home from './page/Home';
-import Profil from './page/user/Profile';
-import './App.css'
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+// PAGES
+import Navbars from "./component/Navbars";
+import HomePage from "./page/Home";
+import AdminPage from "./page/AdminPage";
+import AdminControlPage from "./page/admin/AdminControlPage";
 
 function App() {
   return (
-
-    
-    <Router>
+    <BrowserRouter>
+      <Navbars/>
       <Routes>
-      <Route path='/' element={<Home />}></Route>
-          <Route path='/profile' element={<Profil />}></Route>
-          <Route path='/detail' element={<Detail />}></Route>
-          <Route path='/cart' element={<Cart />}></Route>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/admin/add-product" element={<AdminControlPage />} />
+        <Route path="/admin/add-topping" element={<AdminControlPage />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 

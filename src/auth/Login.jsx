@@ -1,121 +1,147 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { Button, FloatingLabel, Form, Modal } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-import { Button, Modal, Form } from 'react-bootstrap'
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import google from '../assets/image/google.svg';
 import fb from '../assets/image/fb.svg';
 import github from '../assets/image/github.svg';
 
-export default function Login(props, { show, showLogin, showRegister }) {
-  
-  const handleClose = () => showLogin(false)
-  const changeModal = () => {
-    handleClose()
-    showRegister(true)
-  }
+const LoginForm = ({ show, setShow, setShowRegister }) => {
+  const dataUser = [];
+  const navigate = useNavigate();
 
-  //login
-  const [user, setUser] = useState({
-    isLogin: false,
+  const handleClose = () => setShow(false);
+  const changeModal = () => {
+    handleClose();
+    setShowRegister(true);
+  };
+
+  const [userLogin, setUserLogin] = useState({
     name: "",
     email: "",
     password: "",
-  })
+  });
 
-  const userData = JSON.parse(localStorage.getItem("DB_USER"))
-  console.log(userData)
-  const dataSession = []
-
-  if (userData !== null){
-    for (let i = 0; i < userData.length; i++){
-      dataSession.push(userData[i]);
+  const getUser = () => {
+    if (typeof Storage === "undefined") {
+      alert("cant store user");
     }
+
+    const localData = localStorage.getItem("DATA_USER");
+    let data = JSON.parse(localData);
+
+    if (data !== null) {
+      for (let i = 0; i < data.length; i++) {
+        dataUser.push(data[i]);
+      }
+    }
+  };
+
+  function handleOnChange(event) {
+    setUserLogin({
+      ...userLogin,
+      [event.target.name]: event.target.value,
+    });
   }
-  function handleSubmit(){
-    if (userData == null){
-      return alert('Akun tidak ditemukan')
-    }
-    const dataUser = dataSession.filter(
-      (data) => data.email === user.email
-    )
-    if (dataUser[0].password !== user.password){
-      return alert("Password kamu salah!")
+
+  function handleOnSubmit(event) {
+    event.preventDefault();
+    getUser();
+    let loggedIn = dataUser.filter(
+      (element) => element.email === userLogin.email
+    );
+    if (loggedIn.length === 0) {
+      return alert("Email tidak terdaftar");
     }
 
-    let parsed = JSON.stringify(dataUser);
-    localStorage.setItem("SESSION_SET", parsed);
+    if (loggedIn[0].password !== userLogin.password) {
+      return alert("Password kamu salah!");
+    }
+
+    let parsed = JSON.stringify(loggedIn);
+    localStorage.setItem("LOGIN_STATUS", parsed);
     handleClose();
+    handlePage(loggedIn[0].role);
   }
 
+  const handlePage = (role) => {
+    if (role === "admin") {
+      return navigate("/admin");
+    } else {
+      return navigate("/");
+    }
+  };
 
-  return(
-    <Modal
-      {...props}
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Body style={{height: "27rem",  paddingLeft: "50px", paddingRight: "50px"}}>
-      <h1 className= 'text-danger fw-bold mt-3' style={{fontSize:"36px"}}>Login</h1>
-      <Form onSubmit={handleSubmit}>
-      
-        <FloatingLabel controlId="floatingInput" label="Email address" className="mb-3 mt-4" >
-          <Form.Control 
-            type="email" 
-            placeholder="name@example.com" 
-            name='email'
-
-            onChange={e => setUser({ ...user, email: e.target.value })}
-            value={user.email}
+  return (
+    <Modal show={show} onHide={handleClose} style={{marginTop:"10%"}}>
+      <Form className="p-5 " onSubmit={handleOnSubmit}>
+        <h2 className="text-left text-danger fw-bold color-red mb-4">Login</h2>
+        <Form.Group className="my-3">
+          <FloatingLabel label="Email address">
+            <Form.Control
+              type="email"
+              placeholder="yourname@example.com"
+              name="email"
+              onChange={handleOnChange}
             />
-        </FloatingLabel>
-          <FloatingLabel controlId="floatingPassword" label="Password">
-            <Form.Control 
-              type="password" 
-              placeholder="Password" 
-              name='password'
-              onChange={e => setUser({ ...user, password: e.target.value })}
-              value={user.password}
-              />
           </FloatingLabel>
-        <div className="d-grid gap-2">
-        <Button className= 'btnLoginApp mt-4' type="submit" size="lg">
-          Login
-        </Button>
-        </div>
-        <div className="lineOr">
-          <div className="line"><hr/></div>
-          <p className="ms-2 me-2">or</p>
-          <div className="line"><hr/></div>
-        </div>
+        </Form.Group>
+
+        <Form.Group className="mb-3">
+          <FloatingLabel label="Password">
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              name="password"
+              onChange={handleOnChange}
+            />
+          </FloatingLabel>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Button
+            className="btn btn-danger btn-main btn-form col-12"
+            type="submit"
+          >
+            Login
+          </Button>
+        </Form.Group>
         <div className="logoAuth d-flex justify-content-center ms-4 mb-4">
-          <div>
-            <img 
-              src={google}
-              width="30"
-              className="mt-2"
-              alt="Google"
-             />
-          </div>
-          <div>
-            <img 
-              src={fb}
-              width="70"
-              className="btnFb ms-3"
-              alt="Facebook"
-             />
-          </div>
-          <div>
-            <img 
-              src={github}
-              className="btnGithub"
-              width="70"
-              alt="Github"
-             />
-          </div>
-        </div>
- 
+              <div>
+                <img 
+                  src={google}
+                  width="30"
+                  className="mt-2"
+                  alt="Google"
+                />
+              </div>
+              <div>
+                <img 
+                  src={fb}
+                  width="70"
+                  className="btnFb ms-3"
+                  alt="Facebook"
+                />
+              </div>
+              <div>
+                <img 
+                  src={github}
+                  className="btnGithub"
+                  width="70"
+                  alt="Github"
+                />
+              </div>
+            </div>
+        <Form.Group>
+          <p className="text-center my-3">
+            Don't have an account? Click{" "}
+            <span className="fw-bold cursor-pointer" onClick={changeModal}>
+              Here
+            </span>
+          </p>
+        </Form.Group>
       </Form>
-      </Modal.Body>
     </Modal>
-  )
-}
+  );
+};
+
+export default LoginForm;
