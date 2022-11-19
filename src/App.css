@@ -183,10 +183,15 @@ body{
   cursor: pointer;
 }
 
-.btn-user,
-.btn-user:hover {
+.btn-user {
   padding: 7px 5px;
   background: none;
+  outline: none;
+  border: none;
+}
+.btn-user{
+  padding: 7px 5px;
+  background-color: transparent;
   outline: none;
   border: none;
 }
@@ -196,7 +201,7 @@ body{
 }
 
 .icon-size {
-  width: 30px;
+  width: 40px;
   align-self: center;
   justify-self: center;
 }
