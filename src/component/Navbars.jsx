@@ -4,8 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/image/logo.svg';
 import cart from '../assets/image/cart.svg'
 import users from '../assets/image/users.svg';
-import toppingIcon from '../assets/image/addTopping.svg'
-import logoutIcon from '../assets/image/logoutIcon.svg'
+import toppingIcon from '../assets/image/addTopping.svg';
+import productAdd from '../assets/image/productAdd.svg'
+import logoutIcon from '../assets/image/logoutIcon.svg';
 
 import LoginForm from '../auth/Login';
 import RegisterForm from '../auth/Register'
@@ -86,11 +87,21 @@ const Navbars = () => {
                         onClick={() => navigate("/admin/add-product")}
                       >
                           <img 
-                            src={toppingIcon}
+                            src={productAdd}
                             alt=""
                             className='icon-size me-3'
                           />
-                          Add Topping
+                          Add Product
+                      </Dropdown.Item>
+                      <Dropdown.Item
+                        onClick={() => navigate("/admin/add-topping")}
+                      >
+                        <img
+                          src={toppingIcon}
+                          alt=""
+                          className="icon-size me-3"
+                        />
+                        Add Topping
                       </Dropdown.Item>
                       <Dropdown.Divider />
                       <Dropdown.Item 

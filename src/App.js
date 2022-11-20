@@ -6,6 +6,7 @@ import Navbars from "./component/Navbars";
 import HomePage from "./page/Home";
 import Profile from "./page/user/Profile";
 import AdminPage from "./page/AdminPage";
+import ProductPage from './page/user/DetailProduct';
 import AdminControlPage from "./page/admin/AdminControlPage";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Navbars/>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/product/:id" element={<ProductPage />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/admin/add-product" element={<AdminControlPage />} />
