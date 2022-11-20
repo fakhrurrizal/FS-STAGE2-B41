@@ -73,7 +73,7 @@ const LoginForm = ({ show, setShow, setShowRegister }) => {
   };
 
   return (
-    <Modal show={show} onHide={handleClose} style={{marginTop:"10%"}}>
+    <Modal show={show} onHide={handleClose} style={{marginTop:"6%"}}>
       <Form className="p-5 " onSubmit={handleOnSubmit}>
         <h2 className="text-left text-danger fw-bold color-red mb-4">Login</h2>
         <Form.Group className="my-3">
@@ -99,12 +99,17 @@ const LoginForm = ({ show, setShow, setShowRegister }) => {
         </Form.Group>
         <Form.Group className="mb-3">
           <Button
-            className="btn btn-danger btn-main btn-form col-12"
+            className="btnRegister btn btn-danger btn-main btn-form col-12"
             type="submit"
           >
             Login
           </Button>
         </Form.Group>
+        <div style={{ display: 'flex', marginTop: '15px', justifyContent: 'center'}}>
+              <div style={{width: '45%',marginTop: '-4px'}}><hr/></div>
+              <p className="ms-2 me-2">or</p>
+              <div style={{width: '45%',marginTop: '-4px'}}><hr/></div>
+            </div>
         <div className="logoAuth d-flex justify-content-center ms-4 mb-4">
               <div>
                 <img 
@@ -131,6 +136,7 @@ const LoginForm = ({ show, setShow, setShowRegister }) => {
                 />
               </div>
             </div>
+            
         <Form.Group>
           <p className="text-center my-3">
             Don't have an account? Click{" "}

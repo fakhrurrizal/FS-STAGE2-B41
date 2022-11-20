@@ -32,8 +32,8 @@ const Navbars = () => {
           <Navbar.Brand as={Link} to="/">
             <img 
               src={Logo}
-              width="80"
-              hegith="80"
+              width="70"
+              hegith="70"
               className="d-inline-block align-top"
               alt="React Bootstrap logo"
             />

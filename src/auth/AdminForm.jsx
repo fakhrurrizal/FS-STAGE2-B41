@@ -50,7 +50,7 @@ const AdminForm = ({ formEdit }) => {
     localStorage.setItem(keyDataInput, parsed);
   };
   return (
-    <Row className="mx-5 gap-3">
+    <Row className="mx-5 mt-5 gap-3">
       <Col className="col-6">
         <Form className="p-5" onSubmit={handleOnSubmit} id="addForm">
           <h2 className="text-left fw-bold color-red mb-5">{role}</h2>
@@ -98,7 +98,7 @@ const AdminForm = ({ formEdit }) => {
         </Form>
       </Col>
 
-      <Col className="col-4 product-content">
+      <Col className="col-4 ms-3 product-content">
         <img src={item.itemimage} className="image-product rounded-4" alt="" />
       </Col>
     </Row>

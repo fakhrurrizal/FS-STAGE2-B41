@@ -19,7 +19,7 @@ export default function Produk(){
 
         let formater = new Intl.NumberFormat(undefined, {
             style: "currency",
-            currency: "IDR",
+            currency: "IDr",
             maximumFractionDigits: 0,
         });
 
@@ -39,7 +39,7 @@ export default function Produk(){
                 {Products.map((item, index) => (
                     <Col>
                     <Card className="" style={{width:'17rem',borderRadius:'14px',marginRight:'45px',  backgroundColor:"#F3CFC6"}}>
-                        <Card.Img variant="top" src={item.itemimage}  />
+                        <Card.Img variant="top" src={item.itemimage} style={{height:"23rem"}} />
                         <Card.Body>
                             <Card.Title>{item.itemname}</Card.Title>
                             <Card.Text>

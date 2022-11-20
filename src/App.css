@@ -211,12 +211,14 @@ body{
 }
 
 .product-content {
-  height: 400px;
+  height: 550px;
+
   width: 400px;
 }
 
 .image-product {
   object-fit: cover;
+
   height: 100%;
   width: 100%;
 }
