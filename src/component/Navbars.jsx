@@ -18,14 +18,26 @@ const Navbars = () => {
 
   const localData = localStorage.getItem("LOGIN_STATUS");
   const data = JSON.parse(localData);
-  let getLogin = [...data];
+  let getLogin = data;
 
+  let dataCart = [];
+  const getCartData = () => {
+    let data;
+    if (!!getLogin !== false) {
+      data = JSON.parse(localStorage.getItem(`DATA_CART_${getLogin[0].id}`));
+    }
 
+    if (!!data !== false) {
+      for (let i = 0; i < data.length; i++) {
+        dataCart.push(data[i]);
+      }
+    }
+  };
+  getCartData();
   const Logout = () => {
-    getLogin.pop();
-    const parsed = JSON.stringify(getLogin);
-    localStorage.setItem("LOGIN_STATUS", parsed);
-  }
+    localStorage.removeItem("LOGIN_STATUS");
+  };
+
   return (
     <>
       <Navbar expand="lg" className="bg-light">
@@ -41,13 +53,13 @@ const Navbars = () => {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbarScroll' />
           <Navbar.Collapse id="navbarScroll" className='justify-content-end'>
-            {getLogin.length === 0 ? (
+            {!!getLogin === false ? (
               <Nav className="gap-2 col-3">
                   <Button 
                     variant="outline-danger"
                     className="btn-white btn-navbar col-6"
                     onClick={() => setShowLogin(true)}
-
+                    
                   >
                     Login
                   </Button>
@@ -127,12 +139,12 @@ const Navbars = () => {
                     >
                       <img 
                         src={cart}
-                        onClick={() => navigate("/")}
+                        onClick={() => navigate("/cart")}
                         alt=""
                         className="icon-size"
                       />
                       <Badge className="position-absolute badge-position rounded-pill bg-danger">
-                        1
+                      {dataCart.length}
                       </Badge>
                     </Button>
                     <Dropdown.Toggle variant="light" className="btn-user">
@@ -155,7 +167,7 @@ const Navbars = () => {
                         <img 
                           src={logoutIcon}
                           alt=''
-                          classname="icon-size me-3"
+                          className="icon-size me-3"
                         /> 
                         Logout
                       </Dropdown.Item>

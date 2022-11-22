@@ -234,7 +234,7 @@ body{
 
 .image-product {
   width: 100%;
-  height: 400px;
+  height: 500px;
   object-fit: cover;
 }
 
@@ -245,8 +245,8 @@ body{
 }
 
 .toppinglist-image {
-  width: 60px;
-  height: 60px;
+  width: 30px;
+  height: 130px;
   object-fit: cover;
 }
 .fs-7 {
@@ -255,6 +255,12 @@ body{
 
 .toppinglist-card {
   border: none;
+  cursor: pointer;
+  width: 130px;
+}
+img.card-img.checked {
+  width: 30px;
+  right: 10px;
 }
 
 .checked {
@@ -262,6 +268,16 @@ body{
   top: 0;
   right: 40px;
   width: 20px;
+}
+.card-title{
+  text-align: center;
+  font-size: 17px;
+  width: 170px;
+  font-weight: bold;
+}
+
+  .cursor-pointer img {
+    width: 100px;
 }
 .detailProduct .addCart{
   width: 92%;
@@ -499,4 +515,17 @@ border:1px solid #BD0707;
   background-color: transparent;
   color: #BD0707;
   border: 1px solid #BD0707;
+}
+.hr-cart {
+  border: 1px solid var(--red-main);
+}
+
+.cartlist-image {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+}
+
+.delete-cart {
+  font-size: 12px;
 }

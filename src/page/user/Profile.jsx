@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container } from 'react-bootstrap';
 import users from '../../assets/image/user.png';
@@ -9,6 +10,27 @@ import qode from '../../assets/image/QrCode.png';
 
 
 export default function Profile(){
+    const localData = localStorage.getItem("DATA_USER");
+    const data = JSON.parse(localData);
+    let getLogin = data;
+
+    const user = [];
+  const getUser = () => {
+    if (typeof Storage === "undefined") {
+      alert("cant store user");
+    }
+
+    const localData = localStorage.getItem("LOGIN_STATUS");
+    let data = JSON.parse(localData);
+
+    if (data !== null) {
+      for (let i = 0; i < data.length; i++) {
+        user.push(data[i]);
+      }
+    }
+  };
+
+  getUser();
     return(
         <>  
             <Container>
@@ -22,11 +44,11 @@ export default function Profile(){
                             <div className='self'>
                                 <div>
                                     <h5>Full Name</h5>
-                                    <p>Muhammad Fakhrur Rizal</p>
+                                    <p>{user[0].name}</p>
                                 </div>
                                 <div>
                                     <h5>Email</h5>
-                                    <p>izalganteng@gmail.com</p>
+                                    <p>{user[0].email}</p>
                                 </div>
                             </div>
 

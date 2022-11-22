@@ -1,118 +1,240 @@
-import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Form, Button } from 'react-bootstrap';
-import produk1 from '../../assets/image/Produk1.png'
-import hapus from '../../assets/image/trash.svg'
-import invoice from '../../assets/image/invoice.svg'
+import React from "react";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import trash from '../../assets/image/trash.svg';
 
-export const Cart = () => {
+const CartUserPage = () => {
+  const navigate = useNavigate();
+  const localData = localStorage.getItem("LOGIN_STATUS");
+  const data = JSON.parse(localData);
+  let getLogin = data;
+
+  const Products = [];
+  const getProducts = () => {
+    if (typeof Storage === "undefined") {
+      alert("cant store user");
+    }
+
+    const localData = localStorage.getItem("DATA_PRODUCT");
+    let data = JSON.parse(localData);
+
+    if (data !== null) {
+      for (let i = 0; i < data.length; i++) {
+        Products.push(data[i]);
+      }
+    }
+  };
+
+  const Toppings = [];
+  const getToppings = () => {
+    if (typeof Storage === "undefined") {
+      alert("cant store user");
+    }
+
+    const localData = localStorage.getItem("DATA_TOPPING");
+    let data = JSON.parse(localData);
+
+    if (data !== null) {
+      for (let i = 0; i < data.length; i++) {
+        Toppings.push(data[i]);
+      }
+    }
+  };
+
+  let dataCart = [];
+  const getCartData = () => {
+    let data;
+    if (!!getLogin !== false) {
+      data = JSON.parse(localStorage.getItem(`DATA_CART_${getLogin[0].id}`));
+    }
+
+    if (!!data !== false) {
+      for (let i = 0; i < data.length; i++) {
+        dataCart.push(data[i]);
+      }
+    }
+  };
+  getCartData();
+  getProducts();
+  getToppings();
+
+  let formater = new Intl.NumberFormat(undefined, {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0,
+  });
+
+  const deleteCartItem = (cartid) => {
+    let localData = dataCart.filter((e) => e.cartid !== cartid);
+    const parsed = JSON.stringify(localData);
+    localStorage.setItem(`DATA_CART_${getLogin[0].id}`, parsed);
+    navigate("/cart");
+  };
+
+  const getPaid = () => {
+    dataCart.forEach((element) => {
+      element.isPaid = true;
+    });
+    const parsed = JSON.stringify(dataCart);
+    localStorage.setItem(`DATA_CART_${getLogin[0].id}`, parsed);
+    navigate("/cart");
+  };
   return (
     <>
-        <div className="Cart d-flex">
-            <div className="detailCart">
-                <h2>My Cart</h2>
-                <p>Review Your Order</p>
-                <div className="lineCart"></div>
-                <div className='mt-3 d-flex'>
-                    <img 
-                        src={produk1}
-                        className='cartProduk'
-                    />
-                    <div className='ms-4 mt-2'>
-                        <h4 className='fw-bold mb-4'>Ice Coffee Palm</h4>
-                        <p><strong>Toping </strong>: Bill berry, Bubble Tea Gelatin</p>
-                    </div>
-                    <div className='mt-2' style={{marginLeft:"30%"}}>
-                        <p>Rp. 33.000</p>
-                        <img 
-                            src={hapus}
-                            className="mt-3 ms-5"
-                        />
-                    </div>
-                </div>
-                <div className='mt-4 d-flex'>
-                    <img 
-                        src={produk1}
-                        className='cartProduk'
-                    />
-                    <div className='ms-4 mt-2'>
-                        <h4 className='fw-bold mb-4'>Ice Coffee Palm</h4>
-                        <p><strong>Toping </strong>: Bill berry, Bubble Tea Gelatin</p>
-                    </div>
-                    <div className='mt-2' style={{marginLeft:"30%"}}>
-                        <p>Rp. 33.000</p>
-                        <img 
-                            src={hapus}
-                            className="mt-3 ms-5"
-                        />
-                    </div>
-                </div>
-                <div className="lineCart mt-3"></div>
-                <div>
-                    <div className='totalCart'>
-                        <div className="lineSubtotal mt-5"></div>
-                        <div className='d-flex mt-2' style={{fontSize:"18px"}}>
-                            <p>Subtotal</p>
-                            <p style={{marginLeft:"40%"}}>69.000</p>
-                        </div>
-                        <div className='d-flex mt-2' style={{fontSize:"18px"}}>
-                            <strong>Qty</strong>
-                            <p style={{marginLeft:"50%"}}>2</p>
-                        </div>
-                        <div className="lineSubtotal mt-1"></div>
-                        <div className='d-flex mt-2' style={{fontSize:"18px"}}>
-                            <strong>Total</strong>
-                            <p style={{marginLeft:"48%"}}>2</p>
-                        </div>
-                    </div>
-                    <div className='attachTransaction'>
-                        <img 
-                            src={invoice}
-                        />
-                        <p>Attache of Transaction</p>
-                    </div>
-                </div>
-            </div>
-            <div className='formCart'>
-                <Form>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Control 
-                        type="text" 
-                        placeholder="Name" 
-                        className='inputCart' />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Control 
-                        type="email" 
-                        placeholder="Email" 
-                        className='inputCart1' />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Control 
-                        type="number" 
-                        placeholder="Phone" 
-                        className='inputCart2' />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Control 
-                        type="number" 
-                        placeholder="Post Code" 
-                        className='inputCart3' />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                    <Form.Control as="textarea" placeholder="Address" style={{resize:"none"}} rows={5} className="inputCart4" />
-                </Form.Group>
-                <Button
-                    type="submit"
-                    className="paySubmit"
-                >
-                    Pay
-                </Button>
-                </Form>
-            </div>
-        </div>
-    </>
-  )
-}
+      {!!getLogin === false ? (
+        <Container>
+          <h1>Please Login</h1>
+        </Container>
+      ) : (
+        <Container className="my-3 text-danger">
+          <Row>
+            <Col xs={7} className="d-flex flex-column gap-3">
+              <Col xs={12}>
+                <h2 className="fw-bold color-red">My Cart</h2>
+              </Col>
+              <Col>
+                <p className="color-red fs-5">Review Your Order</p>
+                <hr style={{ width:"100%"}} />
+              </Col>
+              <Row>
+                {dataCart.map((item, index) => (
+                  <Col
+                    key={index}
+                    className="col-12 my-1 d-flex flex-row align-items-start"
+                  >
+                    <Col xs={2}>
+                      <img
+                        src={Products[item.itemid].itemimage}
+                        alt=""
+                        className="cartlist-image rounded"
+                      />
+                    </Col>
+                    <Col xs={8}>
+                      <h6 className="fw-bold color-red">
+                        {Products[item.itemid].itemname}
+                      </h6>
+                      <p className="color-red fs-7">
+                        <strong>Toppings : </strong>{" "}
+                        {`${item.topping.map((e) => Toppings[e].itemname)}`}
+                      </p>
+                    </Col>
+                    <Col
+                      xs={2}
+                      className="d-flex flex-column gap-1 align-items-center"
+                    >
+                      <p className="color-red fs-6 my-0">
+                        {formater.format(item.total)}
+                      </p>
+                      <img 
+                        src={trash}
+                        onClick={() => deleteCartItem(item.cartid)}
+                        style={{cursor: "pointer"}}
+                      />
+                    </Col>
+                  </Col>
+                ))}
+              </Row>
+              <Col>
+                <hr style={{ width:"100%"}} />
+                <Col xs={6} className="d-flex flex-row align-items-start">
+                  <Col xs={6}>
+                    <hr style={{ width:"100%"}} />
+                    <p className="color-red fs-6">Subtotal</p>
+                    <p className="color-red fs-6">Qty</p>
+                    <hr/>
+                  </Col>
+                  <Col xs={6}>
+                    <hr style={{ width:"100%"}} />
+                    <p className="color-red fs-6 text-end">
+                      {!!dataCart === false || dataCart.length === 0
+                        ? 0
+                        : formater.format(
+                            dataCart.map((e) => e.total).reduce((a, b) => a + b)
+                          )}
+                    </p>
+                    <p className="color-red fs-6 text-end">{dataCart.length}</p>
+                    <hr style={{ width:"100%"}} />
+                  </Col>
+                </Col>
+                <Col xs={6} className="d-flex flex-row align-items-start">
+                  <Col xs={6}>
+                    <p className="color-red fs-6">Total</p>
+                  </Col>
+                  <Col xs={6}>
+                    <p className="color-red fs-6 text-end">
+                      {!!dataCart === false || dataCart.length === 0
+                        ? 0
+                        : formater.format(
+                            dataCart.map((e) => e.total).reduce((a, b) => a + b)
+                          )}
+                    </p>
+                  </Col>
+                </Col>
+              </Col>
+            </Col>
 
-export default Cart;
+            <Col xs={5}>
+              <Form>
+                <Form.Control
+                  className="my-3"
+                  placeholder="Name"
+                  style={{
+                    border: "1px solid #BD0707",
+                    background: "#E0C8C840",
+                    lineHeight: "2.5",
+                  }}
+                />
+                <Form.Control
+                  className="my-3"
+                  placeholder="Email"
+                  style={{
+                    border: "1px solid #BD0707",
+                    background: "#E0C8C840",
+                    lineHeight: "2.5",
+                  }}
+                />
+                <Form.Control
+                  className="my-3"
+                  placeholder="Phone"
+                  style={{
+                    border: "1px solid #BD0707",
+                    background: "#E0C8C840",
+                    lineHeight: "2.5",
+                  }}
+                />
+                <Form.Control
+                  className="my-3"
+                  placeholder="Pos Code"
+                  style={{
+                    border: "1px solid #BD0707",
+                    background: "#E0C8C840",
+                    lineHeight: "2.5",
+                  }}
+                />
+                <Form.Control
+                  className="my-3"
+                  as="textarea"
+                  placeholder="Leave a comment here"
+                  style={{
+                    height: "150px",
+                    border: "1px solid #BD0707",
+                    background: "#E0C8C840",
+                    lineHeight: "2.5",
+                  }}
+                />
+                <Button
+                  className="btn btn-danger btn-main btn-form col-12"
+                  onClick={() => getPaid}
+                >
+                  Pay
+                </Button>
+              </Form>
+            </Col>
+          </Row>
+        </Container>
+      )}
+    </>
+  );
+};
+
+export default CartUserPage;

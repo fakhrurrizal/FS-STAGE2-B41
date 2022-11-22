@@ -1,121 +1,112 @@
 import React, { useState } from 'react';
-import { Col, Row, Container, Card, FormText, Button } from 'react-bootstrap';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Col, Row, Container, Card,  Button } from 'react-bootstrap';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import check from '../../assets/image/check.svg'
 
 const DetailProduct = () => {
 
-    let getProductURL = useLocation();
-    let getProductId = parseInt(getProductURL.pathname.replace(/\D/g,""));
+    const navigate = useNavigate();
 
-    const localData = localStorage.getItem("LOGIN_STATUS");
-    const data = JSON.parse(localData);
-    let getLogin = data;
+  let getProductURL = useLocation();
+  let getProductId = parseInt(getProductURL.pathname.replace(/\D/g, ""));
 
-    const Product = [];
-    const getProduct = () => {
-        if (typeof Storage === "undefined") {
-            alert("Cant store user");
-        }
+  const localData = localStorage.getItem("LOGIN_STATUS");
+  const data = JSON.parse(localData);
+  let getLogin = data;
 
-        const localData = localStorage.getItem("DATA_PRODUCT");
-        let data = JSON.parse(localData);
-
-        if (data !== null) {
-            for (let i = 0; i < data.length; i++){
-                if (data[i].itemid === getProductId){
-                    Product.push(data[i]);
-                }
-            }
-        }
-    };
-
-    const Toppings = [];
-    const getToppings = () => {
-        if (typeof Storage === "undefined"){
-            alert("cant store user");
-        }
-
-        const localData = localStorage.getItem("DATA_TOPPING");
-        let data = JSON.parse(localData);
-
-        if (data !== null){
-            for (let i = 0; i < data.length; i++){
-                Toppings.push(data[i]);
-            }
-        }
-    };
-
-    const [toppingCheck, setToppingCheck] = useState([]);
-    const [toppingPrice, setToppingPrice] = useState(0);
-
-    getProduct();
-    getToppings();
-
-    const handleChecked = (id, price) => {
-        let filterID = toppingCheck.filter((e) => e === id);
-        if (filterID[0] !== id){
-            setToppingCheck([...toppingCheck, id]);
-            setToppingPrice(toppingPrice + price);
-        }else {
-            setToppingCheck(toppingCheck.filter((e) => e !== id));
-            setToppingPrice(toppingPrice - price);
-        }
-    };
-
-    let formater = new Intl.NumberFormat(undefined, {
-        style: "currency",
-        currency: "IDR",
-        maximumFractionDigits:0,
-    });
-
-    const dataCart = [];
-    const getCartUser = () => {
-        if (typeof Storage === "undefined"){
-            alert("Cant store User")
-        }
-
-        const localData = localStorage.getItem("DATA_CART");
-        let data = JSON.parse(localData);
-
-        if (data !== null) {
-            for (let i = 0; i < data.length; i++){
-                if (data[i].userid === getLogin[0].id){
-                    dataCart.push(data[i]);
-                }
-            }
-        }
-    };
-
-    const saveCartUser = () => {
-        let currentCart = [];
-        
-        let currentProduct = {
-            itemid: Product[0].itemid,
-            topping: toppingCheck,
-            total: Product[0].itemprice + toppingPrice,
-        };
-        currentCart.push(currentProduct);
-
-        let currentCartUser = {
-            userid: getLogin[0].id,
-            cart: currentCart,
-        };
-
-        
-
-        dataCart.push(currentCartUser);
-        const parsed = JSON.stringify(dataCart);
-        localStorage.setItem("DATA_CART", parsed)
+  const Product = [];
+  const getProduct = () => {
+    if (typeof Storage === "undefined") {
+      alert("cant store user");
     }
 
-    const handleOnSubmit = () => {
-        getCartUser();
-        saveCartUser();
-        Navigate("/cart")
+    const localData = localStorage.getItem("DATA_PRODUCT");
+    let data = JSON.parse(localData);
+
+    if (data !== null) {
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].itemid === getProductId) {
+          Product.push(data[i]);
+        }
+      }
+    }
+  };
+
+  const Toppings = [];
+  const getToppings = () => {
+    if (typeof Storage === "undefined") {
+      alert("cant store user");
     }
 
+    const localData = localStorage.getItem("DATA_TOPPING");
+    let data = JSON.parse(localData);
+
+    if (data !== null) {
+      for (let i = 0; i < data.length; i++) {
+        Toppings.push(data[i]);
+      }
+    }
+  };
+
+  const [toppingCheck, setToppingCheck] = useState([]);
+  const [toppingPrice, setToppingPrice] = useState(0);
+
+  getProduct();
+  getToppings();
+
+  const handleChecked = (id, price) => {
+    let filterID = toppingCheck.filter((e) => e === id);
+    if (filterID[0] !== id) {
+      setToppingCheck([...toppingCheck, id]);
+      setToppingPrice(toppingPrice + price);
+    } else {
+      setToppingCheck(toppingCheck.filter((e) => e !== id));
+      setToppingPrice(toppingPrice - price);
+    }
+  };
+
+  let formater = new Intl.NumberFormat(undefined, {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0,
+  });
+
+  const dataCart = [];
+  const getCartUser = () => {
+    if (typeof Storage === "undefined") {
+      alert("cant store user");
+    }
+
+    const localData = localStorage.getItem(`DATA_CART_${getLogin[0].id}`);
+    let data = JSON.parse(localData);
+
+    if (data !== null) {
+      for (let i = 0; i < data.length; i++) {
+        dataCart.push(data[i]);
+      }
+    }
+  };
+
+  const saveCartUser = () => {
+    let currentProduct = {
+      cartid: +new Date(),
+      itemid: Product[0].itemid,
+      topping: toppingCheck,
+      total: Product[0].itemprice + toppingPrice,
+      isPaid: false,
+    };
+
+    dataCart.push(currentProduct);
+    const parsed = JSON.stringify(dataCart);
+    localStorage.setItem(`DATA_CART_${getLogin[0].id}`, parsed);
+  };
+
+  const handleOnSubmit = () => {
+    getCartUser();
+    saveCartUser();
+    navigate("/cart");
+  };
   return (
    <>
     {!!getLogin === false ? (
@@ -134,7 +125,7 @@ const DetailProduct = () => {
                 </Col>
                 <Col className="col-8 d-flex flex-column gap-2">
                     <Col className="col-12">
-                        <h2 className="fw-bold text-danger">{Product[0].itemname}</h2>
+                        <h2 className="text-danger fw-bold">{Product[0].itemname}</h2>
                         <p className="text-danger fs-5">
                             {formater.format(Product[0].itemprice)}
                         </p>
@@ -145,14 +136,15 @@ const DetailProduct = () => {
                             {Toppings.map((item, index) => (
                                 <Col key={index} className="col-12 col-md-3 my-1">
                                     <Card
-                                        className="cursor-pointer align-items-center toppinglist-card position-relative"
+                                        style={{border:"none"}}
+                                        className="toppinglist-card me-2 ms-5 align-items-center position-relative"
                                         onClick={() =>
                                             handleChecked(item.itemid, item.itemprice)
                                         }
                                     >
                                         <Card.Img 
                                             src={item.itemimage}
-                                            className="toppinglist-image"
+                                            style={{width:"60px"}}
                                         />
                                         {toppingCheck.filter(
                                             (element) => element === item.itemid
@@ -163,10 +155,10 @@ const DetailProduct = () => {
                                         )}
                                         
                                         <Card.Body className="d-flex flex-column align-items-center p-1">
-                                            <Card.Title className="fs-7">
+                                            <div className="card-title">
                                                 {item.itemname}
-                                            </Card.Title>
-                                            <Card.Subtitle className="fs-7">
+                                            </div>
+                                            <Card.Subtitle className="fs-9">
                                                 {formater.format(item.itemprice)}
                                             </Card.Subtitle>
                                         </Card.Body>
@@ -196,7 +188,7 @@ const DetailProduct = () => {
                         </Row>
                     </Col>
                 </Col>
-                ;
+                
             </Row>
         </Container>
     )}

@@ -4,10 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Stack, Card, Col } from 'react-bootstrap'
 import LoginForm from "../auth/Login";
 import RegisterForm from "../auth/Register";
-// import product1 from '../assets/image/Produk1.png'
-// import product2 from '../assets/image/Produk2.png'
-// import product3 from '../assets/image/Produk3.png'
-// import product4 from '../assets/image/Produk4.png'
+
 
 export default function Produk({ getLogin }){
     const navigate = useNavigate();
@@ -41,19 +38,21 @@ export default function Produk({ getLogin }){
     return(
         <>  
             <p className='fw-bold' style={{color:"#BD0707", fontSize:"36px", marginLeft:"10%", marginTop:"43%"}}>Let's Order</p>    
-             <Stack direction="horizontal"  style={{marginLeft:"10%", height:"100vh", marginTop:'-110px',}}>
+             <Stack direction="horizontal"  style={{marginLeft:"10%", height:"100vh", marginTop:'-110px',wrapText:"wrap"}}>
                 {Products.map((item, index) => (
                     <Col key={index} >
-                    <Card className="cursor-pointer" 
+                    <Card 
                         onClick={() => 
                         !!getLogin === false ?
                         setShowLogin(true)
                         : navigate(`/product/${item.itemid}`)    
                         } 
-                        style={{width:'17rem',borderRadius:'14px',marginRight:'45px',  backgroundColor:"#F3CFC6"}}>
+                        style={{cursor:"pointer",width:'17rem',borderRadius:'14px',marginRight:'45px',  backgroundColor:"#F3CFC6"}}>
                         <Card.Img variant="top" src={item.itemimage} style={{height:"23rem"}} />
-                        <Card.Body>
-                            <Card.Title>{item.itemname}</Card.Title>
+                        <Card.Body className="text-danger">
+                            <div
+                                style={{fontWeight:"Bold", fontSize:"20px"}}
+                            >{item.itemname}</div>
                             <Card.Text>
                             {item.itemprice}
                             </Card.Text>
